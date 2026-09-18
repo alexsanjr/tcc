@@ -1,0 +1,68 @@
+\documentclass[12pt]{tcc}
+
+% ------------- Configurações -------------
+\input{config/pacotes}
+\input{config/estilos}
+\input{config/cores}
+\input{config/comentarios}
+\input{config/comandos}
+\input{config/acronimos}
+
+% ------------- Informações principais -------------
+\newcommand\dtitle{Seu Título Aqui}
+\newcommand\dauthor{Seu Nome Aqui}
+\newcommand\dadvisor{Seu orientador Aqui}
+\newcommand\dprogram{Coordenação do Curso de Bacharelado em Sistemas de Informação}
+\newcounter{savedpretextualpage}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\dcover
+\clearpage
+
+% A contagem oficial começa na folha de rosto.
+\setcounter{page}{1}
+\dcoverback
+
+% Folhas reservadas: ficha catalográfica e aprovação da banca.
+\dblanksheet
+\dblanksheet
+\input{pre-textuais/dedicatoria}
+\input{pre-textuais/agradecimentos}
+\input{pre-textuais/epigrafe}
+\input{pre-textuais/resumo}
+\input{pre-textuais/abstract}
+
+% ------------- Sumários -------------
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
+% Exibe numeração arábica sem reiniciar a contagem.
+\setcounter{savedpretextualpage}{\value{page}}
+\pagenumbering{arabic}
+\setcounter{page}{\value{savedpretextualpage}}
+\justifying
+
+% --------- Capítulos -------------
+\input{capitulos/1 - Introducao}
+\input{capitulos/2 - Fundamentacao_teorica}
+\input{capitulos/3 - Revisao}
+\input{capitulos/4 - Proposta}
+\input{capitulos/5 - Avaliacao}
+\input{capitulos/6 - Conclusao}
+
+\newcommand{\Extrachap}[1]{\chapter*{#1}\markboth{#1}{#1}%
+\addcontentsline{toc}{chapter}{#1}}
+
+\renewcommand{\bibname}{Referências}
+
+\bibliographystyle{abntex2-alf}
+\bibliography{references}
+
+\label{bibfinalpage}
+
+\end{document}
