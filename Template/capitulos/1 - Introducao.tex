@@ -1,2 +1,261 @@
 \chapter{Introdução}
 \label{sec:introducao}
+
+Este capítulo contextualiza o problema investigado e apresenta a motivação para
+o desenvolvimento do LEAFEON. A discussão parte das características do ensino
+de Arquitetura de Software, examina as dificuldades associadas à realização e
+ao acompanhamento de atividades práticas e situa a proposta em relação ao
+EEVEE, plataforma educacional adotada como ponto de partida para este trabalho.
+Ao final, são apresentados a questão de pesquisa, os objetivos, o percurso
+metodológico e a organização do texto.
+
+\section{Motivação e Contexto}
+\label{sec:motivacao-contexto}
+
+A arquitetura de software descreve estruturas de um sistema, seus elementos e
+as relações estabelecidas entre eles. Também expressa decisões que condicionam
+atributos de qualidade, entre os quais desempenho, segurança, disponibilidade e
+modificabilidade. Seu estudo, portanto, não se limita à memorização de padrões e
+definições. O estudante precisa interpretar um contexto, reconhecer restrições,
+comparar alternativas e justificar decisões cujos efeitos se tornam visíveis ao
+longo do desenvolvimento e da evolução do sistema
+\cite{bass_software_2012,pantoja_training_2024}.
+
+Essas características tornam o ensino da disciplina particularmente difícil.
+Parte dos conceitos arquiteturais é abstrata, e seus efeitos nem sempre podem
+ser observados em exercícios pequenos ou isolados. Por outro lado, a adoção de
+projetos mais realistas introduz dificuldades de escopo, infraestrutura,
+trabalho em equipe e acompanhamento. Uma revisão de 56 experiências
+educacionais identificou a natureza abstrata e ambígua da arquitetura, a falta
+de experiência prática proporcionada por projetos simples e a necessidade de
+ir além de métodos tradicionais entre os problemas mais relatados na literatura
+\cite{galster_teaching_2016,pantoja_training_2024}.
+
+No curso de Bacharelado em Sistemas de Informação considerado nesta pesquisa,
+o programa da disciplina reúne tópicos de naturezas distintas. São estudados
+estilos e organizações arquiteturais, como microsserviços, monólitos modulares,
+arquitetura hexagonal, sistemas orientados a eventos e ambientes multitenant;
+princípios e métodos, como SOLID, DDD, Event Storming, Clean Code e padrões de
+projeto; e tecnologias de integração, como GraphQL, gRPC, API Gateway e
+mensageria, além de segurança em APIs. O desafio pedagógico não está apenas na
+quantidade de assuntos, mas em permitir que o estudante relacione tecnologia,
+decisão de projeto e atributo de qualidade. Essa combinação entre fundamentos,
+padrões, princípios, análise e avaliação também aparece nos cursos examinados
+pela literatura \cite{pantoja_training_2024}.
+
+A aprendizagem ativa oferece um caminho para tratar esse problema, pois coloca
+o estudante na posição de analisar situações, formular soluções e discutir as
+consequências de suas escolhas. Uma meta-análise de 225 estudos realizados em
+cursos de ciências, tecnologia, engenharia e matemática encontrou aumento de
+desempenho e redução das taxas de reprovação nas turmas que adotaram estratégias
+ativas em comparação com aulas predominantemente expositivas
+\cite{freeman_active_2014}. Especificamente no ensino de arquitetura de
+software, uma atividade na qual os estudantes representavam componentes e
+simulavam suas interações favoreceu a compreensão de estilos arquiteturais
+\cite{georgas_supporting_2013}. Esses resultados não eliminam a importância da
+fundamentação teórica, mas indicam que ela pode ser articulada a situações nas
+quais o estudante aplica e discute os conceitos apresentados.
+
+A adoção de atividades frequentes, contudo, aumenta a quantidade de produções
+que precisam ser acompanhadas. Esse aspecto é relevante porque o retorno perde
+parte de sua utilidade quando chega somente depois de encerrado o processo de
+resolução. Ferramentas de avaliação automatizada permitem aplicar critérios
+repetíveis e devolver informações a cada tentativa. As revisões da área,
+entretanto, mostram que essas ferramentas se concentram na correção funcional
+de programas, em geral por meio de testes, e oferecem cobertura limitada de
+aspectos como legibilidade, manutenibilidade e qualidade de projeto
+\cite{keuning_feedback_2018,messer_grading_2024}. Não se pressupõe, portanto,
+que toda decisão arquitetural possa ser corrigida automaticamente. A automação
+é tratada neste trabalho como apoio ao estudante e ao professor, e não como
+substituta da avaliação docente.
+
+O caráter prático da proposta também se relaciona à aproximação entre formação
+acadêmica e atuação profissional. Estudos sobre educação em Engenharia de
+Software relatam diferenças entre as competências desenvolvidas na universidade
+e aquelas esperadas pela indústria, sobretudo quanto à aplicação do
+conhecimento em situações reais, à comunicação, ao trabalho em equipe e ao
+pensamento crítico \cite{garousi_closing_2020}. Projetos de desenvolvimento,
+projetos de código aberto, estudos de caso e aprendizagem baseada em problemas
+são algumas das estratégias empregadas para aproximar o ensino de arquitetura
+das condições encontradas no desenvolvimento de sistemas reais
+\cite{pantoja_training_2024}.
+
+Embora diferentes estratégias tenham sido experimentadas, a literatura não
+aponta uma solução única para os problemas do ensino de arquitetura. Há uma
+lacuna na combinação de estratégias pedagógicas, e ainda são poucas as
+experiências relatadas com ambientes tutores on-line voltados à disciplina
+\cite{pantoja_training_2024}. Esse resultado não demonstra, por si só, a
+inexistência de ferramentas; indica, de maneira mais restrita, que permanece
+aberta a investigação de ambientes capazes de organizar atividades práticas,
+executar experimentos de maneira controlada e registrar evidências do processo
+de realização dessas atividades.
+
+O EEVEE oferece uma base concreta para essa investigação. Nele, o professor
+pode preparar atividades de programação e testes automatizados, e o estudante
+pode desenvolver uma solução em um ambiente Web, submetê-la e consultar o
+resultado da execução. A plataforma registra tentativas e reaplica os mesmos
+critérios de teste a diferentes submissões, características que também permitem
+seu uso em experimentos educacionais \cite{eevee_repository_2026}. Seu modelo
+atual, porém, foi construído principalmente em torno de atividades de
+programação. Para utilizá-lo no ensino de arquitetura, será necessário
+investigar como representar cenários, executar configurações arquiteturais,
+observar seus efeitos e fornecer retorno sobre decisões que podem admitir mais
+de uma solução aceitável.
+
+Diante desse contexto, este trabalho propõe o LEAFEON, uma extensão da
+plataforma EEVEE voltada à experimentação e à aprendizagem de Arquitetura de
+Software. A proposta aproveita a base tecnológica e o fluxo educacional do
+EEVEE e os amplia com recursos para representar cenários, executar atividades
+práticas e observar consequências de decisões arquiteturais. Os requisitos e a
+forma específica de integração serão definidos a partir das necessidades
+pedagógicas e técnicas identificadas durante a pesquisa.
+
+Com base no problema exposto, estabelece-se a seguinte questão de pesquisa:
+\textbf{como uma plataforma interativa de experimentação pode apoiar a
+realização de atividades práticas de Arquitetura de Software no ensino
+superior?}
+
+\section{Objetivos}
+\label{sec:objetivos}
+
+\textbf{Objetivo geral.} Desenvolver e avaliar o LEAFEON como uma extensão do
+EEVEE destinada a apoiar a realização de atividades práticas e a compreensão de
+conceitos de Arquitetura de Software no ensino superior.
+
+\textbf{Objetivos específicos.} Para alcançar o objetivo geral, foram definidos
+os seguintes objetivos específicos:
+
+\begin{enumerate}
+    \item caracterizar, a partir da literatura e do contexto da disciplina, os
+    desafios associados ao ensino prático de Arquitetura de Software e as
+    estratégias utilizadas para enfrentá-los;
+
+    \item identificar os requisitos pedagógicos e técnicos necessários para a
+    realização, o acompanhamento e a avaliação de atividades práticas de
+    Arquitetura de Software;
+
+    \item projetar e desenvolver o LEAFEON, definindo sua forma de integração
+    com o EEVEE e implementando os recursos necessários para a execução de
+    atividades de experimentação arquitetural;
+
+    \item elaborar atividades práticas que permitam aos estudantes aplicar,
+    observar e comparar conceitos e decisões de Arquitetura de Software;
+
+    \item aplicar o LEAFEON em uma turma da disciplina de Arquitetura de
+    Software, registrando dados de uso, resultados das atividades e percepções
+    dos participantes; e
+
+    \item analisar os resultados da aplicação para identificar contribuições,
+    limitações e oportunidades de melhoria no LEAFEON.
+\end{enumerate}
+
+\section{Metodologia}
+\label{sec:metodologia}
+
+\subsection{Delineamento da pesquisa}
+
+Este trabalho será conduzido segundo a Design Science Research (DSR). Essa
+abordagem é adequada a pesquisas que procuram compreender um problema e, ao
+mesmo tempo, projetar e avaliar um artefato destinado a intervir no contexto
+estudado. Na DSR, o desenvolvimento do artefato não constitui um fim isolado:
+sua construção deve ser orientada pelo problema, fundamentada no conhecimento
+existente e acompanhada de avaliação sistemática
+\cite{hevner_design_2004,dresch_design_2015}.
+
+O artefato investigado será o LEAFEON, compreendendo a plataforma, sua
+integração com o EEVEE, as atividades educacionais implementadas e os mecanismos
+de acompanhamento utilizados na avaliação. O processo de pesquisa foi organizado
+com base nas etapas propostas para a DSR: identificação do problema, definição
+dos objetivos da solução, projeto e desenvolvimento, demonstração, avaliação e
+comunicação \cite{peffers_methodology_2007}. Essas etapas não serão tratadas
+como uma sequência estritamente linear. Os resultados das avaliações poderão
+levar à revisão dos requisitos, das atividades e da implementação.
+
+\subsection{Etapas e entregáveis}
+
+O percurso metodológico será composto pelas seguintes etapas:
+
+\begin{enumerate}
+    \item \textbf{Busca na literatura:} serão pesquisados estudos sobre ensino
+    de Arquitetura de Software, aprendizagem ativa, ambientes educacionais e
+    avaliação automatizada. A busca será documentada por meio das bases
+    consultadas, strings de busca e critérios de seleção. O entregável desta
+    etapa será o conjunto inicial de estudos candidatos e o protocolo utilizado
+    para recuperá-los;
+
+    \item \textbf{Seleção e análise dos estudos:} os trabalhos recuperados serão
+    avaliados inicialmente pelo título e resumo e, quando considerados
+    pertinentes, por leitura integral. Serão extraídos dados sobre problemas
+    abordados, estratégias pedagógicas, ferramentas, formas de avaliação e
+    resultados. Os entregáveis serão o portfólio de estudos selecionados e a
+    síntese dos trabalhos correlatos;
+
+    \item \textbf{Definição dos requisitos e da avaliação:} os achados da
+    literatura serão confrontados com o programa da disciplina e com as
+    necessidades do professor. Como resultado, serão produzidos a especificação
+    dos requisitos pedagógicos e técnicos, a definição inicial das atividades
+    práticas e o plano de avaliação do artefato;
+
+    \item \textbf{Projeto e desenvolvimento:} o LEAFEON será desenvolvido de
+    forma iterativa. Cada ciclo compreenderá a seleção de requisitos, a
+    implementação de um incremento e sua verificação técnica e pedagógica. Os
+    entregáveis incluirão os modelos da solução, o código-fonte, versões
+    executáveis e atividades de experimentação arquitetural;
+
+    \item \textbf{Demonstração em sala de aula:} uma versão considerada estável
+    será utilizada em uma turma de Arquitetura de Software. O entregável desta
+    etapa será o conjunto de dados produzidos durante a aplicação, incluindo
+    resultados das atividades, tentativas, tempos de execução e respostas aos
+    instrumentos de pesquisa;
+
+    \item \textbf{Avaliação do artefato:} os dados coletados serão analisados
+    para verificar o atendimento aos requisitos e investigar as contribuições
+    do LEAFEON para a realização de atividades práticas e para a aprendizagem.
+    O entregável será um relatório de avaliação com os resultados quantitativos
+    e qualitativos, as limitações observadas e as melhorias recomendadas; e
+
+    \item \textbf{Refinamento e comunicação:} os resultados da avaliação serão
+    utilizados para priorizar correções e melhorias. Quando houver tempo e
+    viabilidade, uma nova versão retornará à etapa de demonstração e avaliação.
+    Os entregáveis finais serão a versão avaliada do LEAFEON, este trabalho e a
+    comunicação dos resultados em publicação acadêmica.
+\end{enumerate}
+
+O fluxo metodológico será representado com a Business Process Model and
+Notation (BPMN), de modo a explicitar a sequência das atividades, os entregáveis
+e o retorno da avaliação para um novo ciclo de desenvolvimento. A notação será
+utilizada conforme a especificação BPMN 2.0.2 \cite{omg_bpmn_2014}.
+
+\subsection{Planejamento da avaliação}
+
+A avaliação será conduzida com estudantes de uma turma de Arquitetura de
+Software após a realização de atividades práticas no LEAFEON. Será adotado um
+estudo de uso e aceitação com um único grupo de participantes, sem divisão entre
+grupo experimental e grupo de controle. Essa escolha mantém a avaliação
+compatível com o caráter exploratório do trabalho e com a aplicação da
+ferramenta em uma turma, sem atribuir à pesquisa a finalidade de demonstrar uma
+relação causal entre o uso do LEAFEON e o desempenho acadêmico.
+
+Durante a aplicação, serão coletados registros produzidos pela plataforma,
+como resultados das atividades, tempo de conclusão, número de tentativas e taxa
+de conclusão. Após o uso, será aplicado um questionário baseado no Modelo de
+Aceitação de Tecnologia, contemplando facilidade de uso percebida, utilidade
+percebida e intenção de uso \cite{davis_perceived_1989}. As respostas objetivas
+serão registradas em escala Likert de cinco pontos, e questões abertas permitirão
+que os participantes relatem dificuldades, contribuições percebidas e sugestões
+de melhoria.
+
+Os dados quantitativos serão analisados de forma descritiva, por meio de
+frequências, medidas de tendência central e sínteses dos registros de uso. As
+respostas abertas serão organizadas por temas recorrentes. A interpretação
+conjunta dessas evidências buscará verificar a viabilidade de uso do LEAFEON, a
+aceitação da ferramenta e sua contribuição percebida para a realização das
+atividades práticas. Dessa forma, os resultados permitirão avaliar o artefato e
+orientar seu refinamento, sem serem apresentados como comprovação definitiva de
+melhoria da aprendizagem.
+
+A participação na pesquisa deverá ser voluntária, com esclarecimento sobre os
+dados coletados e sua finalidade. Os dados utilizados na análise serão
+anonimizados, e a participação ou recusa não deverá produzir prejuízo acadêmico.
+Antes da aplicação, serão observados os procedimentos éticos exigidos pela
+instituição para pesquisas realizadas com estudantes.

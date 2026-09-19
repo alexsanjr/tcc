@@ -6,3 +6,5 @@ build/
 
 # Pastas de PDFs gerados pelo build.sh de atas pós defesa
 atas pós defesa/latex/*/
+
+docs/
